@@ -459,3 +459,105 @@ The analysis shows that the identified domains have different levels of independ
 Therefore, the identified business domains should not automatically be converted into separate microservices.
 
 The next step is to evaluate these domains as potential service candidates and define appropriate service boundaries based on business responsibility, data ownership, coupling, scalability requirements, and deployment independence.
+
+## 4. Domain Ownership and Service Candidates
+
+The identified business domains must be evaluated before defining the microservice architecture.
+
+A business domain should not automatically become an independent microservice. Service boundaries should be determined based on factors such as business responsibility, data ownership, coupling, scalability requirements, deployment independence, and operational complexity.
+
+For the initial version of the Travel Reservation System, the following domains are considered as potential service candidates:
+
+| Business Domain                        | Initial Service Decision                       | Reason                                                                                               |
+| -------------------------------------- | ---------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| Identity and Access Management         | Independent Service Candidate                  | Owns user identity, authentication, authorization, roles, and permissions.                           |
+| Travel Inventory Management            | Independent Service Candidate                  | Owns travel services, schedules, seats, availability, and pricing.                                   |
+| Travel Search and Discovery            | Initially part of Travel Inventory             | Depends heavily on travel inventory data and does not initially require an independent deployment.   |
+| Reservation and Booking Management     | Independent Service Candidate                  | Owns the reservation and booking lifecycle and contains critical concurrency-related business logic. |
+| Payment Management                     | Independent Service Candidate                  | Owns payment and refund transactions and external payment provider integration.                      |
+| Cancellation and Refund Management     | Split between Booking and Payment              | Cancellation belongs to the booking lifecycle, while refunds belong to payment processing.           |
+| Notification Management                | Independent Service Candidate                  | Can process events independently and should not affect critical booking or payment operations.       |
+| Administration and Platform Management | Initially a capability, not a separate service | Primarily provides controlled access and management across existing domains.                         |
+
+### 4.1 Initial Service Candidates
+
+Based on the domain analysis, the following domains are strong candidates for independent services:
+
+1. Identity and Access Management
+2. Travel Inventory Management
+3. Reservation and Booking Management
+4. Payment Management
+5. Notification Management
+
+These domains have relatively clear business responsibilities and data ownership boundaries.
+
+### 4.2 Domains Not Initially Separated
+
+The following domains will not initially become independent microservices:
+
+#### Travel Search and Discovery
+
+Travel Search and Discovery will initially remain part of the Travel Inventory domain because it depends heavily on travel inventory data.
+
+As search traffic, performance requirements, or search complexity increase, this capability can be extracted into an independent Search Service in the future.
+
+#### Cancellation Management
+
+Cancellation management will initially remain within the Reservation and Booking Management domain because cancellation is part of the booking lifecycle.
+
+#### Refund Management
+
+Refund processing will remain within the Payment Management domain because refunds are directly related to payment transactions.
+
+#### Administration and Platform Management
+
+Administration will initially be implemented as controlled administrative capabilities using existing service interfaces.
+
+A separate Administration Service can be considered in the future if platform-level administrative workflows become sufficiently complex.
+
+### 4.3 Initial Service Boundary Direction
+
+The initial service boundary direction is:
+
+```text
+Identity and Access
+        │
+        ├── User Identity
+        ├── Authentication
+        └── Authorization
+
+
+Travel Inventory
+        │
+        ├── Bus Management
+        ├── Flight Management
+        ├── Routes
+        ├── Schedules
+        ├── Seats and Availability
+        └── Travel Search
+
+
+Reservation and Booking
+        │
+        ├── Seat Selection
+        ├── Temporary Reservation
+        ├── Booking Lifecycle
+        ├── Booking Cancellation
+        └── Booking History
+
+
+Payment
+        │
+        ├── Payment Processing
+        ├── Payment Status
+        ├── Refund Processing
+        └── Payment Provider Integration
+
+
+Notification
+        │
+        ├── Booking Notifications
+        ├── Payment Notifications
+        ├── Cancellation Notifications
+        └── Refund Notifications
+```
