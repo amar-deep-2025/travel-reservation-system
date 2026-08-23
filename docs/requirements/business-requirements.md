@@ -19,3 +19,35 @@ The platform will initially support bus and flight reservation, allowing users t
 The architecture will be designed with clear services boundaries and independent business domains to support future growth. As the platform evolves, additional travel services such as train reservation , hotel bookings, cab services, and travel packages can be introduced without requiring significant changes to the existing core system.
 
 The long-term goal is to design a reliable, maintainable, and scalable microservices-based platform that can support increasing numbers of users, travel providers, reservations, and independent services.
+
+## 3. Business Goals
+
+The Travel Reservation System aims to achieve the following business goals :
+
+### 3.1 Unified Travel Reservation Platform.
+
+Provide users with a centralized platform to search , compare, and reserve travel services across multiple travels domains.
+
+### 3.2 Extensible Travel Domain Support.
+
+Design the system so that additional travel domains, such as a trains, hotels, cab services, and travel packages,can be introduced in the future without requiring a complete redesign.
+
+### 3.3 Reliable Reservation System
+
+Provide a reliable process that manages travel availability, seat selection , reservation creation, payment processing , booking confirmation , and cancellation.
+
+### 3.4 Support for Multiple User Roles
+
+Support different types of users, including customers, administrators, and travel providers with clearly defined responsibilities and access permissions.
+
+### 3.5 Scalability and Independent Services Growth
+
+Design the platform using independent business services so that heavily used components can be scaled independently as the number od users, bookings, and travel providers increases.
+
+### 3.6 Maintainable and Evolvable Architecture
+
+Maintain clear business boundaries and modular service design to make the system easier to develop, test, maintain, and extended over time.
+
+### 3.7 Future Integration Capability
+
+Provide an architecture that can support future integration with external travel providers, payment gateways, notification systems, and other third-party services.
