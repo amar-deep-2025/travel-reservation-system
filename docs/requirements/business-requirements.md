@@ -278,3 +278,149 @@ The system shall allow administrators to:
 The system shall ensure that administrative operations are accessible only to authorized users with the appropriate permissions.
 
 The system shall maintain appropriate records of significant administrative actions for audit and operational purposes.
+
+## 6. Non-Functional Requirements
+
+### 6.1 Scalability
+
+The Travel Reservation System shall be designed to support growth in users, travel providers, travel inventory, and booking volume without requiring a complete redesign of the platform.
+
+The system shall:
+
+- Support independent scaling of major business domains when required.
+- Allow heavily used services to scale independently based on demand.
+- Support future horizontal scaling through multiple instances of application services.
+- Avoid unnecessary coupling between independent business domains.
+- Support the addition of new travel domains without significantly affecting existing functionality.
+- Support increasing volumes of search requests, booking requests, and payment transactions.
+- Be designed to accommodate future caching and load-balancing mechanisms where required.
+- Support future expansion across additional travel services, geographical regions, and external providers.
+
+### 6.2 Performance
+
+The Travel Reservation System shall provide responsive performance for common user operations, particularly travel search, availability checks, booking creation, and payment processing.
+
+The system shall:
+
+- Provide efficient responses for travel search requests.
+- Support concurrent requests for travel availability and booking operations.
+- Minimize unnecessary processing and data retrieval during common operations.
+- Handle increased traffic without significantly degrading the user experience.
+- Support pagination for large collections of data, such as travel search results and booking history.
+- Support future caching mechanisms for frequently accessed or relatively static data.
+- Ensure that long-running operations do not unnecessarily block critical user requests.
+- Support asynchronous processing for operations that do not require an immediate response, where appropriate.
+
+Performance targets and measurable response-time requirements may be defined and refined as the system evolves.
+
+### 6.3 Availability and Reliability
+
+The Travel Reservation System shall be designed to provide reliable operation and maintain service availability, particularly for critical business operations such as travel search, seat availability, booking, payment, cancellation, and refund processing.
+
+The system shall:
+
+- Handle failures in individual components without unnecessarily affecting unrelated functionality.
+- Prevent temporary failures in external systems from causing unnecessary data loss or inconsistent booking states.
+- Support appropriate error handling and recovery mechanisms for failed operations.
+- Ensure that critical operations can be safely retried where applicable.
+- Avoid duplicate processing of important operations, such as booking creation, payment processing, and refunds.
+- Maintain accurate booking and payment states during system or communication failures.
+- Support appropriate timeout and retry mechanisms when communicating with dependent services or external systems.
+- Be designed to support future fault-tolerance and resilience mechanisms.
+- Maintain sufficient operational information to investigate and recover from failures.
+
+The system shall ensure that the failure of non-critical operations, such as notification delivery, does not prevent the successful completion of critical operations such as booking confirmation or payment processing.
+
+### 6.4 Security
+
+The Travel Reservation System shall protect user accounts, sensitive data, and critical business operations from unauthorized access and misuse.
+
+The system shall:
+
+- Require authentication for access to protected resources and operations.
+- Enforce authorization based on user roles and permissions.
+- Ensure that customers can access only their own account information and bookings.
+- Ensure that travel providers can access and manage only the resources associated with their organization.
+- Restrict administrative operations to authorized administrators.
+- Protect user credentials and sensitive information from unauthorized exposure.
+- Validate and sanitize incoming data to reduce the risk of invalid or malicious requests.
+- Protect communication between system components and external services where required.
+- Support secure session and authentication management.
+- Maintain appropriate audit information for significant security-sensitive and administrative operations.
+- Prevent unauthorized modification of bookings, payments, refunds, and travel inventory.
+- Support future security enhancements as the platform and its integrations evolve.
+
+The system shall apply appropriate security controls to ensure the confidentiality, integrity, and availability of critical platform data and operations.
+
+### 6.5 Data Consistency
+
+The Travel Reservation System shall maintain accurate and consistent data across critical business operations, particularly travel availability, reservations, bookings, payments, cancellations, and refunds.
+
+The system shall:
+
+- Ensure that a travel seat cannot be successfully confirmed for multiple customers for the same travel schedule.
+- Maintain consistent booking and payment states throughout the booking lifecycle.
+- Prevent duplicate processing of booking, payment, cancellation, and refund operations.
+- Ensure that related operations are processed in a controlled and reliable manner.
+- Handle concurrent requests for limited travel inventory without creating inconsistent availability.
+- Maintain accurate seat availability when bookings are confirmed, cancelled, expired, or refunded where applicable.
+- Support safe retry mechanisms for operations that may be repeated because of temporary failures or communication issues.
+- Detect and appropriately handle conflicting updates to the same business resource.
+- Maintain sufficient information to recover or reconcile incomplete operations when failures occur.
+- Support eventual consistency between independent business services where immediate consistency is not required.
+
+The system shall prioritize data correctness and integrity for critical operations over unnecessary assumptions about immediate consistency across all services.
+
+### 6.6 Maintainability
+
+The Travel Reservation System shall be designed to support efficient development, testing, maintenance, and future modification throughout its lifecycle.
+
+The system shall:
+
+- Maintain clear separation of responsibilities between different business domains and system components.
+- Define clear boundaries between services to reduce unnecessary dependencies and coupling.
+- Follow consistent coding, API design, and error-handling practices.
+- Support independent development, testing, and deployment of services where appropriate.
+- Maintain clear and up-to-date technical documentation for system architecture, APIs, major business workflows, and important design decisions.
+- Use a structured version control workflow to track changes and maintain project history.
+- Support automated testing for critical business logic and important system integrations.
+- Be designed so that changes in one business domain have minimal impact on unrelated domains.
+- Support future refactoring and replacement of individual components without requiring a complete redesign of the platform.
+- Maintain a clear and understandable project structure to simplify onboarding and future development.
+
+The system shall prioritize clean design, modularity, documentation, and controlled dependencies to ensure that the platform remains maintainable as its complexity and scale increase.
+
+### 6.7 Observability
+
+The Travel Reservation System shall provide sufficient visibility into system behavior, application health, and important business operations to support monitoring, troubleshooting, and operational analysis.
+
+The system shall:
+
+- Generate structured logs for important application and business events.
+- Record relevant information for errors and unexpected failures.
+- Provide health information for application services and critical dependencies where applicable.
+- Support monitoring of important operational metrics, such as request volume, error rates, response times, and service availability.
+- Enable tracing of requests across multiple services where required.
+- Provide sufficient contextual information to investigate failures related to bookings, payments, cancellations, refunds, and external integrations.
+- Support monitoring and alerting capabilities as the platform evolves.
+- Avoid exposing sensitive information in logs, monitoring data, or error messages.
+
+The observability design shall support efficient identification, investigation, and resolution of operational issues in a distributed system environment.
+
+### 6.8 Extensibility
+
+The Travel Reservation System shall be designed to support future business and technical expansion without requiring significant changes to existing core functionality.
+
+The system shall:
+
+- Support the addition of new travel domains, such as train reservations, hotel bookings, cab services, and travel packages.
+- Allow new travel providers and external integrations to be introduced with minimal impact on existing functionality.
+- Support the addition of new payment providers and notification channels.
+- Allow business capabilities to evolve independently where appropriate.
+- Avoid tightly coupling core booking functionality to a specific travel domain.
+- Support future enhancements to pricing, cancellation, refund, and reservation policies.
+- Allow existing services and components to be modified, replaced, or extended without requiring a complete redesign of the platform.
+- Support future integration with external travel inventory and reservation systems.
+- Maintain clear interfaces and boundaries to simplify future system expansion.
+
+The architecture shall prioritize modularity and flexibility to ensure that the platform can evolve as business requirements, travel domains, user demand, and technical requirements change.
