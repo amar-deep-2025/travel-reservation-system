@@ -51,3 +51,50 @@ Maintain clear business boundaries and modular service design to make the system
 ### 3.7 Future Integration Capability
 
 Provide an architecture that can support future integration with external travel providers, payment gateways, notification systems, and other third-party services.
+
+## 4. Stakeholders and Actors
+
+The Travel Reservation System will involve multiple stakeholders and actors who interact with the platform directly or indirectly.
+
+### 4.1 Customer/User
+
+A customer is an end user who use the platform to search for and reserve travel services.
+
+The customer will be able to:
+
+- Register and authenticate with the platform.
+- Search for available buses and flights.
+- View travel schedules, availability, and pricing.
+- Select available seats.
+- Create and manages their reservations.
+- Create payments for bookings.
+- View booking history and booking details.
+- Cancel booking and cancellation notifications.
+
+### 4.2 Travel Provider
+
+A travel provider is responsible for offering and managing travel services on the platform, such as bus operators and airline providers.
+
+### 4.3 Administrator
+
+An administrator is responsible for managing and monitoring the overall platform.
+
+The administrator will be able to
+
+- Manage customer and travel provider accounts.
+- Approve or manage travel providers.
+- Monitor travel services and reservations.
+- Manage platform-level configurations.
+- Handle operational and administrative activities.
+- Monitor system activity and relevant business operations.
+
+### 4.4 External System
+
+The platform will interact with external systems to support specific business capabilities.
+
+Examples include:
+
+- Payment gateway providers for processing payments and refunds.
+- Email and SMS providers for sending notifications.
+- External travel provider systems for future travel inventory integration.
+- Other third-party services that ay be required as the platform evolves.
