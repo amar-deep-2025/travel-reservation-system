@@ -424,3 +424,220 @@ The system shall:
 - Maintain clear interfaces and boundaries to simplify future system expansion.
 
 The architecture shall prioritize modularity and flexibility to ensure that the platform can evolve as business requirements, travel domains, user demand, and technical requirements change.
+
+## 7. Initial Project Scope
+
+The initial version of the Travel Reservation System will focus on establishing the core capabilities required to support travel search, reservation, booking, payment, and notification workflows.
+
+The first implementation will support the following travel domains:
+
+- Bus reservations
+- Flight reservations
+
+The initial project scope will include:
+
+### 7.1 User and Access Management
+
+- Customer registration and authentication.
+- Customer profile management.
+- Role-based access for customers, travel providers, and administrators.
+- Basic account management and authorization controls.
+
+### 7.2 Travel Search and Discovery
+
+- Search for available buses and flights.
+- Search based on origin, destination, and travel date.
+- View travel schedules, pricing, and availability.
+- Filter and sort available travel options.
+- View detailed travel information.
+
+### 7.3 Travel Inventory Management
+
+- Travel providers can manage buses and flights.
+- Travel providers can define routes and schedules.
+- Travel providers can manage seat availability and pricing.
+- Travel providers can view reservations related to their services.
+
+### 7.4 Reservation and Booking
+
+- View and select available seats.
+- Create temporary seat reservations.
+- Create pending bookings.
+- Confirm bookings after successful payment.
+- Handle failed and expired bookings.
+- View booking details and booking history.
+
+### 7.5 Payment Processing
+
+- Initiate payments for pending bookings.
+- Track payment status.
+- Handle successful and failed payments.
+- Maintain the relationship between bookings and payment transactions.
+- Initially support a mock payment implementation before integrating a real payment gateway.
+
+### 7.6 Cancellation and Refunds
+
+- Cancel eligible bookings.
+- Release seats after successful cancellation.
+- Calculate refund eligibility based on cancellation policies.
+- Support refund processing and refund status tracking.
+
+### 7.7 Notifications
+
+- Send booking confirmation notifications.
+- Send payment status notifications.
+- Send cancellation and refund notifications.
+- Initially support email notifications.
+- Design the notification capability for future support of SMS and other channels.
+
+### 7.8 Administration
+
+- Manage customer accounts.
+- Manage travel provider accounts.
+- Monitor travel services and bookings.
+- Monitor payments, cancellations, and refunds.
+- Perform authorized platform-level administrative operations.
+
+The initial implementation will prioritize the core booking workflow and establish a scalable foundation for future expansion.
+
+## 8. Future Expansion Scope
+
+The Travel Reservation System is intended to evolve beyond its initial implementation. The architecture and service boundaries should support the introduction of additional travel domains, business capabilities, integrations, and operational improvements without requiring a complete redesign of the platform.
+
+Future expansion may include the following areas:
+
+### 8.1 Additional Travel Domains
+
+The platform may support additional travel-related services, including:
+
+- Train reservations.
+- Hotel bookings.
+- Cab and local transportation services.
+- Travel packages.
+- Other travel and tourism-related services.
+
+### 8.2 External Travel Provider Integration
+
+The platform may integrate with external travel providers and third-party inventory systems to:
+
+- Retrieve travel availability and schedules.
+- Synchronize travel inventory.
+- Retrieve pricing information.
+- Create or manage reservations through external provider systems.
+- Support multiple external providers through standardized integration interfaces.
+
+### 8.3 Advanced Pricing and Promotions
+
+Future versions may support:
+
+- Dynamic pricing.
+- Promotional offers and discount codes.
+- Provider-specific pricing rules.
+- Seasonal pricing.
+- Loyalty and reward programs.
+
+### 8.4 Additional Payment Options
+
+The platform may support:
+
+- Multiple payment gateway providers.
+- Additional payment methods.
+- Wallet-based payments.
+- International payment support.
+- Automated refund processing.
+
+### 8.5 Enhanced Notification Channels
+
+The notification system may be extended to support:
+
+- SMS notifications.
+- Push notifications.
+- Messaging platforms.
+- Travel reminders and schedule updates.
+
+### 8.6 Advanced Administration and Reporting
+
+Future administrative capabilities may include:
+
+- Business and operational dashboards.
+- Revenue and booking analytics.
+- Travel provider performance reports.
+- Customer activity analysis.
+- Audit and compliance reporting.
+
+### 8.7 Advanced Scalability and Resilience
+
+As the platform grows, the system may introduce additional capabilities such as:
+
+- Advanced caching strategies.
+- Distributed rate limiting.
+- Advanced load balancing.
+- Event-driven workflows.
+- Distributed tracing.
+- Automated service scaling.
+- Enhanced fault-tolerance mechanisms.
+
+### 8.8 Platform and API Expansion
+
+Future versions may support:
+
+- Public or partner APIs.
+- Mobile application integration.
+- API versioning.
+- Third-party developer integrations.
+- Multi-region deployment where required.
+
+## 9. Out of Scope
+
+The following capabilities are outside the scope of the initial version of the Travel Reservation System. These features may be considered in future iterations based on business requirements and platform growth.
+
+The initial version will not include:
+
+### 9.1 Additional Travel Domains
+
+- Train reservations.
+- Hotel bookings.
+- Cab and local transportation services.
+- Travel packages.
+- Other travel and tourism-related services beyond bus and flight reservations.
+
+### 9.2 Advanced Pricing and Promotions
+
+- Dynamic pricing.
+- Promotional campaigns and discount codes.
+- Loyalty and reward programs.
+- Complex provider-specific pricing rules.
+
+### 9.3 Advanced Payment Capabilities
+
+- Multiple payment gateway integrations.
+- International payment support.
+- Wallet and stored payment methods.
+- Advanced automated refund workflows.
+
+### 9.4 Advanced Notification Channels
+
+- SMS notifications.
+- Push notifications.
+- Messaging platform integrations.
+- Automated travel reminders and schedule alerts.
+
+### 9.5 Advanced Reporting and Analytics
+
+- Advanced business intelligence dashboards.
+- Revenue analytics.
+- Provider performance analytics.
+- Customer behavior analysis.
+- Predictive analytics and recommendation systems.
+
+### 9.6 Mobile Applications
+
+Native mobile applications for Android and iOS are not included in the initial project scope. The initial version will focus on backend services and the required web-based client or API interfaces.
+
+### 9.7 Multi-Region Deployment
+
+The initial version will not implement multi-region deployment, global traffic distribution, or advanced disaster recovery infrastructure.
+
+### 9.8 Complex External Provider Integrations
+
+The initial version will not include integration with multiple real-world external travel inventory providers. The architecture may define extension points for such integrations in the future.
