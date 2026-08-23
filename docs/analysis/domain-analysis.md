@@ -709,3 +709,25 @@ Owns Its Data
      +
 Controls Data Modification
 ```
+
+## 6. Core Business Workflows
+
+The following workflows represent the most important business processes of the Travel Reservation System.
+
+Analyzing these workflows helps identify:
+
+- Service interactions.
+- Data ownership boundaries.
+- Required communication patterns.
+- Consistency requirements.
+- Potential failure scenarios.
+- Areas that may require synchronous or asynchronous processing.
+
+The initial implementation will focus on the following core workflows:
+
+1. Travel Search Workflow
+2. Seat Reservation and Booking Workflow
+3. Payment and Booking Confirmation Workflow
+4. Booking Cancellation and Refund Workflow
+
+The detailed workflows will be documented in the following sections.
