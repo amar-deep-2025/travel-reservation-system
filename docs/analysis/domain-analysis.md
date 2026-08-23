@@ -712,22 +712,36 @@ Controls Data Modification
 
 ## 6. Core Business Workflows
 
-The following workflows represent the most important business processes of the Travel Reservation System.
+The core business workflows of the Travel Reservation System begin with actions performed by system users.
 
-Analyzing these workflows helps identify:
+The primary users involved in the system are:
 
-- Service interactions.
-- Data ownership boundaries.
-- Required communication patterns.
-- Consistency requirements.
-- Potential failure scenarios.
-- Areas that may require synchronous or asynchronous processing.
+- Customers, who search for and reserve travel services.
+- Travel Providers, who manage travel inventory and related services.
+- Administrators, who manage and monitor platform-level operations.
 
-The initial implementation will focus on the following core workflows:
+The most critical workflow in the initial version is the customer travel reservation journey.
 
-1. Travel Search Workflow
-2. Seat Reservation and Booking Workflow
-3. Payment and Booking Confirmation Workflow
-4. Booking Cancellation and Refund Workflow
+The customer journey can be broadly represented as:
 
-The detailed workflows will be documented in the following sections.
+```text
+Customer
+   ↓
+Search Travel
+   ↓
+View Travel Options
+   ↓
+Select Travel and Seat
+   ↓
+Create Temporary Reservation
+   ↓
+Create Pending Booking
+   ↓
+Initiate Payment
+   ↓
+Payment Result
+   ↓
+Confirm Booking / Handle Payment Failure
+   ↓
+Send Notification
+```
