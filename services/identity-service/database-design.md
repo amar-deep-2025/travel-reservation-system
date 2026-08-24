@@ -274,32 +274,39 @@ The `user_roles` table uses the following composite primary key:
 
 ---
 
+---
+
 ## 8. Database Design Summary
 
 The initial Identity Service database consists of three tables:
 
+- `users`
+- `roles`
+- `user_roles`
+
+The responsibility of each table is:
+
+| Table        | Responsibility                                                                       |
+| ------------ | ------------------------------------------------------------------------------------ |
+| `users`      | Stores user identity, authentication credentials, and account lifecycle information. |
+| `roles`      | Stores the authorization roles available in the system.                              |
+| `user_roles` | Manages the many-to-many relationship between users and roles.                       |
+
+### Entity Relationship
+
 ```text
-users
-roles
-user_roles
-```
-
-┌─────────────┐ ┌─────────────┐
-│ users │ │ roles │
-│ │ │ │
-│ id (PK) │ │ id (PK) │
-└──────┬──────┘ └──────▲──────┘
-│ │
-│ │
-▼ │
-┌────────────────────────────┴──┐
-│ user_roles │
-├───────────────────────────────┤
-│ user_id (PK, FK → users.id) │
-│ role_id (PK, FK → roles.id) │
-└───────────────────────────────┘
-
-```
-
-
+┌─────────────┐              ┌─────────────┐
+│    users    │              │    roles    │
+│             │              │             │
+│ id (PK)     │              │ id (PK)     │
+└──────┬──────┘              └──────┬──────┘
+       │                            │
+       │                            │
+       ▼                            ▼
+       ┌────────────────────────────┐
+       │         user_roles         │
+       ├────────────────────────────┤
+       │ user_id (PK, FK → users.id)│
+       │ role_id (PK, FK → roles.id)│
+       └────────────────────────────┘
 ```
