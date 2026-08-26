@@ -4,6 +4,7 @@ import com.travel.identity.dto.request.RegisterUserRequest;
 import com.travel.identity.dto.response.RegisterUserResponse;
 import com.travel.identity.entity.Role;
 import com.travel.identity.entity.User;
+import com.travel.identity.exception.ResourceAlreadyExistsException;
 import com.travel.identity.repository.RoleRepository;
 import com.travel.identity.repository.UserRepository;
 import com.travel.identity.service.UserService;
@@ -27,10 +28,10 @@ public class UserServiceImpl implements UserService {
     public RegisterUserResponse registerUser(RegisterUserRequest request) {
 
         if (userRepository.existsByUsername(request.getUsername())){
-            throw new RuntimeException("Username already exists");
+            throw new ResourceAlreadyExistsException("Username already exists");
         }
         if (userRepository.existsByEmail(request.getEmail())){
-            throw new RuntimeException("Email already exists");
+            throw new ResourceAlreadyExistsException("Email already exists");
         }
         Role role=roleRepository.findByName("ROLE_USER")
                 .orElseThrow(()->new RuntimeException("Default role ROLE_USER not found"));
