@@ -1,6 +1,8 @@
 package com.travel.identity.controller.auth;
 
+import com.travel.identity.dto.request.LoginRequest;
 import com.travel.identity.dto.request.RegisterUserRequest;
+import com.travel.identity.dto.response.LoginResponse;
 import com.travel.identity.dto.response.RegisterUserResponse;
 import com.travel.identity.service.UserService;
 import jakarta.validation.Valid;
@@ -28,5 +30,13 @@ public class AuthController {
         RegisterUserResponse response = userService.registerUser(request);
 
         return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(response);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest request){
+
+        LoginResponse response =userService.login(request);
+
+        return ResponseEntity.ok(response);
     }
 }
