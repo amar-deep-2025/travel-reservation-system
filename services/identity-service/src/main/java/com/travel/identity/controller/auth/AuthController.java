@@ -1,7 +1,9 @@
 package com.travel.identity.controller.auth;
 
 import com.travel.identity.dto.request.LoginRequest;
+import com.travel.identity.dto.request.RefreshTokenRequest;
 import com.travel.identity.dto.request.RegisterUserRequest;
+import com.travel.identity.dto.response.AccessTokenResponse;
 import com.travel.identity.dto.response.LoginResponse;
 import com.travel.identity.dto.response.RegisterUserResponse;
 import com.travel.identity.service.UserService;
@@ -38,5 +40,11 @@ public class AuthController {
         LoginResponse response =userService.login(request);
 
         return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/refresh")
+    public ResponseEntity<AccessTokenResponse> refreshToken(@Valid @RequestBody RefreshTokenRequest request){
+        String accessToken=userService.refreshAccessToken(request.getRefreshToken());
+        return ResponseEntity.ok(new AccessTokenResponse(accessToken));
     }
 }

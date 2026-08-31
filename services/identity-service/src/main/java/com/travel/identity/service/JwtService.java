@@ -1,6 +1,8 @@
 package com.travel.identity.service;
 
 import com.travel.identity.entity.User;
+import com.travel.identity.exception.JwtException;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,6 +31,7 @@ public class JwtService {
     public String generateAccessToken(User user){
         return Jwts.builder()
                 .subject(String.valueOf(user.getId()))
+                .claim("tokenType","access")
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis()+accessTokenExpiration))
                 .signWith(getSigningKey())
@@ -39,6 +42,7 @@ public class JwtService {
 
         return Jwts.builder()
                 .subject(String.valueOf(user.getId()))
+                .claim("tokenType","refresh")
                 .issuedAt(new Date())
                 .expiration(new Date(
                         System.currentTimeMillis()+refreshTokenExpiration
@@ -55,6 +59,24 @@ public class JwtService {
                 .parseSignedClaims(token)
                 .getPayload()
                 .getSubject();
+    }
+
+    public String validateRefreshToken(String token){
+
+        Claims claims=Jwts.parser()
+                .verifyWith(getSigningKey())
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
+
+        String tokenType=claims.get("tokenType", String.class);
+
+        System.out.println("Token Type "+tokenType);
+
+        if (!"refresh".equals(tokenType)){
+            throw new JwtException("Invalid token type");
+        }
+        return  claims.getSubject();
     }
 
 }

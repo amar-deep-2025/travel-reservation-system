@@ -89,4 +89,14 @@ public class UserServiceImpl implements UserService {
                         .map(role->role.getName()).toList()
         );
     }
+
+    @Override
+    public String refreshAccessToken(String refreshToken) {
+
+        String userId=jwtService.validateRefreshToken(refreshToken);
+        User user=userRepository.findById(Long.valueOf(userId))
+                .orElseThrow(()->
+                        new ResourceNotFoundException("User not found"));
+        return jwtService.generateAccessToken(user);
+    }
 }

@@ -11,5 +11,5 @@ public interface UserService {
     RegisterUserResponse registerUser(RegisterUserRequest request);
     LoginResponse login(LoginRequest request);
     UserResponse getCurrentUser(Long userId);
-
+    String refreshAccessToken(String refreshToken);
 }

@@ -43,4 +43,9 @@ public class GlobalExceptionHandler {
                 .status(HttpStatus.NOT_FOUND)
                 .body(exception.getMessage());
     }
+
+    @ExceptionHandler(JwtException.class)
+    public ResponseEntity<String> handlejwtException(JwtException exception){
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid or expired");
+    }
 }
