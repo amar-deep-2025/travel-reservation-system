@@ -7,6 +7,7 @@ import com.travel.identity.dto.response.LoginResponse;
 import com.travel.identity.dto.response.RegisterUserResponse;
 import com.travel.identity.entity.Role;
 import com.travel.identity.entity.User;
+import com.travel.identity.exception.AccountDisabledException;
 import com.travel.identity.exception.InvalidCredentialsException;
 import com.travel.identity.exception.ResourceAlreadyExistsException;
 import com.travel.identity.exception.ResourceNotFoundException;
@@ -66,6 +67,9 @@ public class UserServiceImpl implements UserService {
         User user=userRepository.findByUsernameOrEmail(request.getUsernameOrEmail(),request.getUsernameOrEmail())
                 .orElseThrow(()->new InvalidCredentialsException("Invalid username/email or password"));
 
+        if (!user.isEnabled()){
+            throw new AccountDisabledException("User account is disabled");
+        }
         if (!passwordEncoder.matches(request.getPassword(), user.getPasswordHash())){
             throw new InvalidCredentialsException("Invalid username/email or password");
         }

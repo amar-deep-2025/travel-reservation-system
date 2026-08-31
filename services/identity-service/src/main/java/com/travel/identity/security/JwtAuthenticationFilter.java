@@ -1,6 +1,7 @@
 package com.travel.identity.security;
 
 import com.travel.identity.entity.User;
+import com.travel.identity.exception.InvalidCredentialsException;
 import com.travel.identity.exception.ResourceNotFoundException;
 import com.travel.identity.repository.UserRepository;
 import com.travel.identity.service.JwtService;
@@ -24,6 +25,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtService jwtService;
     private final UserRepository userRepository;
 
+
     public JwtAuthenticationFilter(JwtService jwtService, UserRepository userRepository){
         this.jwtService=jwtService;
         this.userRepository=userRepository;
@@ -44,6 +46,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         if (authHeader==null || !authHeader.startsWith("Bearer ")){
             filterChain.doFilter(request,response);
+            System.out.println("No Authorization header or not Bearer");
             return;
         }
         String token =authHeader.substring(7);
@@ -55,6 +58,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             String userId=jwtService.extractUserId(token);
             System.out.println("userId"+userId);
             User user=userRepository.findByIdWithRoles(Long.valueOf(userId)).orElseThrow(()->new ResourceNotFoundException("User not found"));
+            if (!user.isEnabled()){
+                throw new InvalidCredentialsException("User account is disabled");
+            }
             List<SimpleGrantedAuthority> authorities=user.getRoles()
                     .stream()
                     .map(role->new SimpleGrantedAuthority(role.getName()))

@@ -48,4 +48,12 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handlejwtException(JwtException exception){
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid or expired");
     }
+
+    @ExceptionHandler(AccountDisabledException.class)
+    public ResponseEntity<String> handleAccountDisabled(AccountDisabledException exception){
+
+        return ResponseEntity
+                .status(HttpStatus.FORBIDDEN)
+                .body(exception.getMessage());
+    }
 }
