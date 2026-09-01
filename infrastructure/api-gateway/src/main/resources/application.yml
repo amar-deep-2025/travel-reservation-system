@@ -1,9 +1,17 @@
+server:
+  port: 5152
+
 spring:
   application:
     name: api-gateway
 
-server:
-  port: 5152
+  cloud:
+    gateway:
+      routes:
+        - id: identity-service
+          uri: lb://IDENTITY-SERVICE
+          predicates:
+            - Path=/api/auth/**,/api/users/**,/api/admin/**
 
 eureka:
   client:
