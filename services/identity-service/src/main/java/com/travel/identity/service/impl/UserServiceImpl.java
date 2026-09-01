@@ -14,6 +14,7 @@ import com.travel.identity.exception.ResourceNotFoundException;
 import com.travel.identity.repository.RoleRepository;
 import com.travel.identity.repository.UserRepository;
 import com.travel.identity.service.JwtService;
+import com.travel.identity.service.RefreshTokenService;
 import com.travel.identity.service.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -25,12 +26,14 @@ public class UserServiceImpl implements UserService {
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
+    private final RefreshTokenService refreshTokenService;
 
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder, JwtService jwtService){
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder, JwtService jwtService, RefreshTokenService refreshTokenService){
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtService=jwtService;
+        this.refreshTokenService=refreshTokenService;
     }
 
     @Override
@@ -77,6 +80,8 @@ public class UserServiceImpl implements UserService {
         String accessToken=jwtService.generateAccessToken(user);
         String refreshToken=jwtService.generateRefreshToken(user);
 
+        refreshTokenService.saveRefreshToken(user, refreshToken);
+
         return new LoginResponse(accessToken, refreshToken);
     }
 
@@ -98,9 +103,16 @@ public class UserServiceImpl implements UserService {
     public String refreshAccessToken(String refreshToken) {
 
         String userId=jwtService.validateRefreshToken(refreshToken);
+        if(!refreshTokenService.isValid(refreshToken)){
+            throw new InvalidCredentialsException("Invalid or revoked refresh Token");
+        }
         User user=userRepository.findById(Long.valueOf(userId))
                 .orElseThrow(()->
                         new ResourceNotFoundException("User not found"));
+
+        if(!user.isEnabled()){
+            throw new AccountDisabledException("User account is disabled");
+        }
         return jwtService.generateAccessToken(user);
     }
 }
