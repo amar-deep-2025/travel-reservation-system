@@ -29,7 +29,7 @@ public class SecurityConfig {
                         .pathMatchers("/actuator/health/**")
                         .permitAll()
 
-                        .pathMatchers("api/admin/**")
+                        .pathMatchers("/api/admin/**")
                         .hasRole("ADMIN")
 
                         .anyExchange()
@@ -43,6 +43,8 @@ public class SecurityConfig {
 //                )
                 .oauth2ResourceServer(
                         oauth2-> oauth2
+                                .authenticationEntryPoint(new SecurityErrorHandler())
+                                .accessDeniedHandler(new SecurityErrorHandler())
                                 .jwt(jwt->jwt
                                         .jwtAuthenticationConverter(new AccessTokenAuthenticationConverter()))
                 )
