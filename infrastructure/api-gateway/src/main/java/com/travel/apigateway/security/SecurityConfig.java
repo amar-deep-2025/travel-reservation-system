@@ -29,16 +29,23 @@ public class SecurityConfig {
                         .pathMatchers("/actuator/health/**")
                         .permitAll()
 
+                        .pathMatchers("api/admin/**")
+                        .hasRole("ADMIN")
+
                         .anyExchange()
                         .authenticated()
                 )
 
+//                .oauth2ResourceServer(
+//                        oauth2 -> oauth2
+//                                .jwt(Customizer.withDefaults())
+//
+//                )
                 .oauth2ResourceServer(
-                        oauth2 -> oauth2
-                                .jwt(Customizer.withDefaults())
-
+                        oauth2-> oauth2
+                                .jwt(jwt->jwt
+                                        .jwtAuthenticationConverter(new AccessTokenAuthenticationConverter()))
                 )
-
                 .build();
     }
 }

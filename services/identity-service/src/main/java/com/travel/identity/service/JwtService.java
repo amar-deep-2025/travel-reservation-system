@@ -1,5 +1,6 @@
 package com.travel.identity.service;
 
+import com.travel.identity.entity.Role;
 import com.travel.identity.entity.User;
 import com.travel.identity.exception.JwtException;
 import io.jsonwebtoken.Claims;
@@ -37,6 +38,9 @@ public class JwtService {
         return Jwts.builder()
                 .subject(String.valueOf(user.getId()))
                 .claim("tokenType","access")
+                .claim("role", user
+                        .getRoles().stream().map(Role::getName)
+                        .toList())
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis()+accessTokenExpiration))
                 .signWith(getSigningKey())
