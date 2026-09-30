@@ -1,41 +1,33 @@
 package com.travel.flight.mapper;
 
-import com.travel.flight.dto.duffel.response.DuffelOfferRequestDataResponse;
 import com.travel.flight.dto.duffel.response.DuffelOfferResponse;
-import com.travel.flight.dto.duffel.response.FlightSearchResponse;
+import com.travel.flight.dto.duffel.response.FlightOfferResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
 @RequiredArgsConstructor
-public class FlightSearchMapper {
+public class FlightOfferMapper {
 
     private final FlightCommonMapper commonMapper;
 
-    public List<FlightSearchResponse> mapOffers(
-            DuffelOfferRequestDataResponse response) {
-
-        if (response == null || response.getOffers() == null) {
-            return List.of();
-        }
-
-        return response.getOffers()
-                .stream()
-                .map(this::mapOffer)
-                .toList();
-    }
-
-    private FlightSearchResponse mapOffer(
+    public FlightOfferResponse mapOffer(
             DuffelOfferResponse offer) {
 
-        return FlightSearchResponse.builder()
+        return FlightOfferResponse.builder()
                 .offerId(offer.getId())
+                .baseAmount(offer.getBaseAmount())
+                .baseCurrency(offer.getBaseCurrency())
+                .taxAmount(offer.getTaxAmount())
+                .taxCurrency(offer.getTaxCurrency())
                 .totalAmount(offer.getTotalAmount())
                 .currency(offer.getTotalCurrency())
+                .totalEmissionsKg(offer.getTotalEmissionsKg())
                 .expiresAt(offer.getExpiresAt())
                 .airline(commonMapper.mapAirline(offer.getOwner()))
+                .passengerIdentityDocumentRequired(
+                        offer.isPassengerIdentityDocumentRequired()
+                )
                 .slices(commonMapper.mapSlices(offer.getSlices()))
                 .build();
     }

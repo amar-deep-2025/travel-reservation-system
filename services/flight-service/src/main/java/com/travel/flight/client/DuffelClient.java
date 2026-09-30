@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.travel.flight.dto.duffel.requests.DuffelOfferRequest;
 import com.travel.flight.dto.duffel.requests.DuffelOfferRequestWrapper;
 import com.travel.flight.dto.duffel.response.DuffelOfferRequestDataResponse;
+import com.travel.flight.dto.duffel.response.DuffelOfferResponse;
 import com.travel.flight.dto.duffel.response.DuffelResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -37,5 +38,20 @@ public class DuffelClient {
                 );
 
         return objectMapper.readValue(response, responseType);
+    }
+    public DuffelOfferResponse getOffer(String offerId) throws  JsonProcessingException{
+
+        String response=duffelClient.get()
+                .uri("air/offers/{offerId}", offerId)
+                .retrieve()
+                .body(String.class);
+
+        JavaType responseType=objectMapper.getTypeFactory()
+                .constructParametricType(DuffelResponse.class,
+                        DuffelOfferResponse.class);
+
+        DuffelResponse<DuffelOfferResponse> duffelResponse=objectMapper.readValue(response, responseType);
+
+        return duffelResponse.getData();
     }
 }
