@@ -1,4 +1,4 @@
-package com.travel.flight.dto.duffel.requests;
+package com.travel.flight.dto.duffel.request;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;

@@ -1,9 +1,7 @@
 package com.travel.flight.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.travel.flight.dto.duffel.requests.DuffelOfferRequestWrapper;
-import com.travel.flight.dto.duffel.response.DuffelOfferRequestDataResponse;
-import com.travel.flight.dto.duffel.response.DuffelResponse;
+import com.travel.flight.dto.duffel.request.DuffelOfferRequestWrapper;
 import com.travel.flight.dto.duffel.response.FlightSearchResponse;
 import com.travel.flight.service.FlightSearchService;
 import jakarta.validation.Valid;
@@ -14,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/flights")
+@RequestMapping("/air/flights")
 @RequiredArgsConstructor
 public class FlightSearchController {
 

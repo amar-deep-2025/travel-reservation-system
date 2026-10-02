@@ -1,8 +1,7 @@
-package com.travel.flight.dto.duffel.requests;
+package com.travel.flight.dto.duffel.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;

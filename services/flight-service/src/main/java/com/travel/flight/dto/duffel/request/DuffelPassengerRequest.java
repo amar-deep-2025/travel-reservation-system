@@ -1,8 +1,7 @@
-package com.travel.flight.dto.duffel.requests;
+package com.travel.flight.dto.duffel.request;
 
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;

@@ -2,10 +2,9 @@ package com.travel.flight.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.travel.flight.client.DuffelClient;
-import com.travel.flight.dto.duffel.requests.DuffelOfferRequest;
+import com.travel.flight.dto.duffel.request.DuffelOfferRequest;
 
 import com.travel.flight.dto.duffel.response.DuffelOfferRequestDataResponse;
-import com.travel.flight.dto.duffel.response.DuffelOfferResponse;
 import com.travel.flight.dto.duffel.response.DuffelResponse;
 import com.travel.flight.dto.duffel.response.FlightSearchResponse;
 import com.travel.flight.mapper.FlightSearchMapper;
