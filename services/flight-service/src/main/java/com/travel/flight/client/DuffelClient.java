@@ -87,7 +87,7 @@ public class DuffelClient {
             String response = duffelClient.post()
                     .uri("air/orders")
                     .contentType(MediaType.APPLICATION_JSON)
-                    .body(wrapper)
+                    .body(requestJson)
                     .retrieve()
                     .body(String.class);
 
