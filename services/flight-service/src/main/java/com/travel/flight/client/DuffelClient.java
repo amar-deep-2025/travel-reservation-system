@@ -100,5 +100,14 @@ public class DuffelClient {
             throw  e;
         }
     }
+    public JsonNode getOrderById(String orderId) throws JsonProcessingException{
+
+        String response=duffelClient.get()
+                .uri("air/orders/{orderId}",orderId)
+                .retrieve()
+                .body(String.class);
+
+        return objectMapper.readTree(response);
+    }
 
 }

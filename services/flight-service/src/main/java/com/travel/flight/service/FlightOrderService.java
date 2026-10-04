@@ -17,4 +17,7 @@ public class FlightOrderService {
 
         return duffelClient.createOrder(request);
     }
+    public JsonNode getOrderById(String orderId) throws JsonProcessingException{
+        return duffelClient.getOrderById(orderId);
+    }
 }

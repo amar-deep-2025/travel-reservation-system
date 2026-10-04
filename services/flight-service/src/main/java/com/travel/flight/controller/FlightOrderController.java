@@ -4,11 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.travel.flight.dto.duffel.request.DuffelCreatedOrderRequest;
 import com.travel.flight.service.FlightOrderService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/air/orders")
@@ -19,7 +17,12 @@ public class FlightOrderController {
 
     @PostMapping
     public JsonNode createOrder(@RequestBody DuffelCreatedOrderRequest request)throws JsonProcessingException {
-        // Implement the logic to create a flight order
+
         return flightOrderService.createOrder(request);
+    }
+
+    @GetMapping("/{orderId}")
+    public JsonNode getOrderById(@Valid  @PathVariable String orderId)throws JsonProcessingException{
+        return flightOrderService.getOrderById(orderId);
     }
 }
