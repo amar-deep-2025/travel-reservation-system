@@ -27,4 +27,13 @@ public class FlightOrderService {
         return duffelClient.createOrderCancellation(orderId);
     }
 
+   public JsonNode getCancerOrderById(String orderId) throws JsonProcessingException{
+        return duffelClient.getOrderCancellationsById(orderId);
+   }
+
+   public JsonNode confirmCancelOrder(String cancellationId )throws JsonProcessingException{
+        return duffelClient.confirmCancelOrder(cancellationId);
+   }
+
+
 }

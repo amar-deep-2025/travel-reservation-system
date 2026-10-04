@@ -40,4 +40,18 @@ public class FlightOrderController {
 
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/order_cancellations/{orderId}")
+    public ResponseEntity<JsonNode> getCancerOrderById(@PathVariable String orderId) throws JsonProcessingException{
+        JsonNode response=flightOrderService.getCancerOrderById(orderId);
+
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/order_cancellations/{cancellationId}/confirm")
+    public ResponseEntity<JsonNode> confirmCancelOrder(@PathVariable String cancellationId) throws JsonProcessingException{
+        JsonNode response=flightOrderService.confirmCancelOrder(cancellationId);
+
+        return ResponseEntity.ok(response);
+    }
 }

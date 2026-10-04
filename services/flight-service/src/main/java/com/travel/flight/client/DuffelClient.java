@@ -135,6 +135,23 @@ public class DuffelClient {
         return objectMapper.readTree(response);
     }
 
+    public JsonNode getOrderCancellationsById(String orderId) throws JsonProcessingException{
 
+        String response=duffelClient.get()
+                .uri("air/order_cancellations/{orderId}", orderId)
+                .retrieve()
+                .body(String.class);
+        return objectMapper.readTree(response);
+    }
+
+    public JsonNode confirmCancelOrder(String cancellationId)throws JsonProcessingException{
+
+        String response=duffelClient.post()
+                .uri("/air/order_cancellations/{cancellationId}/actions/confirm", cancellationId)
+                .retrieve()
+                .body(String.class);
+
+        return objectMapper.readTree(response);
+    }
 
 }
