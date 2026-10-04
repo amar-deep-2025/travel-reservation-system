@@ -6,6 +6,7 @@ import com.travel.flight.dto.duffel.request.DuffelCreatedOrderRequest;
 import com.travel.flight.service.FlightOrderService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -24,5 +25,19 @@ public class FlightOrderController {
     @GetMapping("/{orderId}")
     public JsonNode getOrderById(@Valid  @PathVariable String orderId)throws JsonProcessingException{
         return flightOrderService.getOrderById(orderId);
+    }
+
+    @GetMapping
+    public ResponseEntity<JsonNode> getAllOrders() throws JsonProcessingException{
+        JsonNode response=flightOrderService.getAllOrders();
+
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/{orderId}/cancellations")
+    public ResponseEntity<JsonNode> createOrderCancellation(@PathVariable String orderId) throws JsonProcessingException{
+        JsonNode response=flightOrderService.createOrderCancellation(orderId);
+
+        return ResponseEntity.ok(response);
     }
 }

@@ -3,6 +3,7 @@ package com.travel.flight.client;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.travel.flight.dto.duffel.request.*;
 import com.travel.flight.dto.duffel.response.DuffelOfferRequestDataResponse;
 import com.travel.flight.dto.duffel.response.DuffelOfferResponse;
@@ -109,5 +110,31 @@ public class DuffelClient {
 
         return objectMapper.readTree(response);
     }
+
+    public JsonNode getAllOrders() throws JsonProcessingException{
+        String response=duffelClient.get()
+                .uri("/air/orders")
+                .retrieve()
+                .body(String.class);
+        return objectMapper.readTree(response);
+    }
+
+    public JsonNode createOrderCancellation(String orderId)throws JsonProcessingException{
+
+        ObjectNode requestBody=objectMapper.createObjectNode();
+        requestBody.putObject("data").put("order_id",orderId);
+
+        String requestJson=objectMapper.writeValueAsString(requestBody);
+
+        String response=duffelClient.post()
+                .uri("/air/order_cancellations")
+                .body(requestJson)
+                .retrieve()
+                .body(String.class);
+
+        return objectMapper.readTree(response);
+    }
+
+
 
 }

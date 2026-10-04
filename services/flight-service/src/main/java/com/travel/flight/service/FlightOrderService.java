@@ -20,4 +20,11 @@ public class FlightOrderService {
     public JsonNode getOrderById(String orderId) throws JsonProcessingException{
         return duffelClient.getOrderById(orderId);
     }
+    public JsonNode getAllOrders() throws  JsonProcessingException{
+        return duffelClient.getAllOrders();
+    }
+    public JsonNode createOrderCancellation(String orderId) throws JsonProcessingException{
+        return duffelClient.createOrderCancellation(orderId);
+    }
+
 }
