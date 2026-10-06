@@ -177,4 +177,22 @@ public class DuffelClient {
         return objectMapper.readTree(response);
     }
 
+    public JsonNode createPayment(PaymentRequestDto requestDtoe) throws JsonProcessingException{
+
+        ObjectNode root=objectMapper.createObjectNode();
+
+        root.set(
+                "data",
+                objectMapper.valueToTree(requestDtoe)
+        );
+        String requestJson=objectMapper.writeValueAsString(root);
+
+        String response=duffelClient.post()
+                .uri("air/payments")
+                .body(requestJson)
+                .retrieve()
+                .body(String.class);
+        return objectMapper.readTree(response);
+    }
+
 }

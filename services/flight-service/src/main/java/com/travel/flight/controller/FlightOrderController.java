@@ -62,12 +62,5 @@ public class FlightOrderController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/payments/{orderId}")
-    public ResponseEntity<JsonNode> getOrderPayments(
-            @PathVariable String orderId) throws JsonProcessingException {
 
-        JsonNode response = flightOrderService.getOrderPayments(orderId);
-
-        return ResponseEntity.ok(response);
-    }
 }

@@ -39,9 +39,7 @@ public class FlightOrderService {
         return duffelClient.getAllOrderCancellations();
    }
 
-    public JsonNode getOrderPayments(String orderId) throws JsonProcessingException {
-        return duffelClient.getOrderPayments(orderId);
-    }
+
 
 
 }
