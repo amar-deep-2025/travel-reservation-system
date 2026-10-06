@@ -164,4 +164,17 @@ public class DuffelClient {
         return objectMapper.readTree(response);
     }
 
+    public JsonNode getOrderPayments(String orderId) throws JsonProcessingException {
+
+        String response = duffelClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path("air/payments")
+                        .queryParam("order_id", orderId)
+                        .build())
+                .retrieve()
+                .body(String.class);
+
+        return objectMapper.readTree(response);
+    }
+
 }
