@@ -154,4 +154,14 @@ public class DuffelClient {
         return objectMapper.readTree(response);
     }
 
+    public JsonNode getAllOrderCancellations() throws JsonProcessingException{
+
+        String response=duffelClient.get()
+                .uri("/air/order_cancellations")
+                .retrieve()
+                .body(String.class);
+
+        return objectMapper.readTree(response);
+    }
+
 }

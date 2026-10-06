@@ -54,4 +54,11 @@ public class FlightOrderController {
 
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/order_cancellations")
+    public ResponseEntity<JsonNode> getAllOrderCancellations() throws JsonProcessingException{
+        JsonNode response=flightOrderService.getAllOrderCancellations();
+
+        return ResponseEntity.ok(response);
+    }
 }
