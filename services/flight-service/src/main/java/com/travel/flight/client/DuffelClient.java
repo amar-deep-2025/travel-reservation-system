@@ -195,4 +195,13 @@ public class DuffelClient {
         return objectMapper.readTree(response);
     }
 
+    public JsonNode getPaymentByPaymentId(String paymentId) throws JsonProcessingException{
+
+        String response=duffelClient.get()
+                .uri("air/payments/{paymentId}", paymentId)
+                .retrieve()
+                .body(String.class);
+
+        return  objectMapper.readTree(response);
+    }
 }

@@ -19,4 +19,7 @@ public class PaymentService {
     public JsonNode getOrderPayments(String orderId) throws JsonProcessingException {
         return duffelClient.getOrderPayments(orderId);
     }
+    public JsonNode getPaymentByPaymentId(String paymentId) throws JsonProcessingException {
+        return duffelClient.getPaymentByPaymentId(paymentId);
+    }
 }

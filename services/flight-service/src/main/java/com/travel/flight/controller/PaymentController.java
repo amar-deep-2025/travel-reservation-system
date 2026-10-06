@@ -29,4 +29,13 @@ public class PaymentController {
 
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/payment/{paymentId}")
+    public ResponseEntity<JsonNode> getPaymentByPaymentId(
+            @PathVariable String paymentId) throws JsonProcessingException {
+
+        JsonNode response = paymentService.getPaymentByPaymentId(paymentId);
+
+        return ResponseEntity.ok(response);
+    }
 }
